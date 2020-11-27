@@ -16,8 +16,10 @@ on:
     inputs:
       ssh:
         description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
+        required: true
+        default: 'true'
+  watch:
+    types: started
 #  schedule:
 #    - cron: 0 8 * * 5
 
@@ -83,6 +85,9 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+        
+    - name: fullconenat
+      run: git clone -b master --single-branch https://github.com/LGA1150/openwrt-fullconenat package/fullconenat
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
